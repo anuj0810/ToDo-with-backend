@@ -1,0 +1,103 @@
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="main-div">
+    <h1 id="main-heading">TODO App</h1>
+     <hr>
+     <!-- <div id="form-and-data"> -->
+  <div id="submit-form">
+  <form action='/todo' method="POST">
+    <div id="description">
+      <div><label for="descption">DESCRIPTION</label> <br>
+        <br></div>
+      
+      <div id="description-form">
+      <input type="text" name="description"  placeholder="What do you need to do" required>
+    </div>
+    
+  </div>
+    <hr>
+    <div id="category-and-date">
+      <div id="category">
+    Category <br>
+    <select name="category" id="category"  required>
+      <option value="" disabled selected hidden>Choose the category</option>
+                        <option value="PERSONAL">Personal</option>
+                        <option value="WORK">Work</option>
+                        <option value="CLEANING">Cleaning</option>
+                        <option value="SCHOOL">School</option>
+                        <option value="OTHERS">Others</option>
+    </select>
+  </div>
+  <div id="date">
+    Due Date<br>
+    <input type="date" name="dueDate" id="dueDate" required>
+  </div>
+  </div>
+</div>
+  <br><hr>
+    <input type="Submit" value="Add Task">
+  </form>
+
+<div id="data">
+  <form action="delete_task" method="POST">
+    <button type="submit" id="delete">
+      <i class="fa fa-trash-o"></i>
+      Delete Tasks
+    </button>
+    <hr>
+    <ul>
+      <% for(let i of todo_list){%>
+      <li>
+        <div class="list-box">
+          <span>
+            <input type="checkbox" id="box" name="check <%= i._id %>" value="<%= i._id %>">
+          </span>
+
+          <span id="task_desc">
+            <%=i.description%>
+          </span>
+          <% if(i.category=="PERSONAL"){ %>
+          <div id="task_category" class="red">
+            <%=i.category%>
+          </div>
+          <%} else if (i.category=="WORK"){ %>
+          <div id="task_category" class="darkviolet">
+            <%=i.category%>
+          </div>
+          <% } else if (i.category=="CLEANING"){ %>
+          <div id="task_category" class="yellow">
+            <%=i.category%>
+          </div>
+          <% } else if (i.category=="SCHOOL"){ %>
+          <div id="task_category" class="orange">
+            <%=i.category%>
+          </div>
+          <% } else if (i.category=="OTHERS"){ %>
+          <div id="task_category" class="green">
+            <%=i.category%>
+          </div>
+          <% } %>
+          <!-- display of date -->
+          <div id="task_date">
+            <i class="fa fa-calendar" aria-hidden="true"></i> <%=i.dueDate%>
+          </div>
+        </div>
+      </li>
+
+      <%}%>
+</ul>
+</form>
+</div>
+</div>
+</div>
+      <script src="script.js"></script>    
+    </body>
+</html>
